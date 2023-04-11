@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+</head>
+<body>
+
+<table class="table" bordercolor="black" border="1" width="100%">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">USERNAME</th>
+        <th scope="col">PASSWORD</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">ROLE</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+<!--        <td th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getId()}"></td>-->
+<!--        <td th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getUsername()}"></td>-->
+        <td th:text="${user.getId()}"></td>
+        <td> <a th:href="@{/admin/user/{id}(id=${user.getId()})}" th:text="${user.getUsername()}"></a></td>
+        <td th:text="${user.getPassword()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:each="role : ${user.getRoles()}" th:text="${role.getName()}"></td>
+
+        <td> <a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}">Edit user</a>  </td>
+        <td> <form th:method="DELETE" th:action="@{/admin/user/{id}(id=${user.getId()})}">
+            <input th:type="submit" value="Delete user"/></form> </td>
+<!--        <td><form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">-->
+<!--            <input th:type="submit" value="Delete user"/></form>  </td>-->
+
+    </tr>
+    </tbody>
+
+</table>
+<hr/>
+
+<a type="button" th:href="@{/admin/new}" class="btn btn-secondary">Create new user</a>
+
+<p><a type="button" th:href="@{/logout}" class="btn btn-secondary bg-secondary text-white">Logout</a></p>
+
+<br/>
+<hr/>
+</body>
+</html>
