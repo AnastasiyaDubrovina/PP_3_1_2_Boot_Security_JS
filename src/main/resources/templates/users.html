@@ -20,8 +20,6 @@
     </thead>
     <tbody>
     <tr th:each="user: ${users}">
-<!--        <td th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getId()}"></td>-->
-<!--        <td th:href="@{/user/{id}(id=${user.getId()})}" th:text="${user.getUsername()}"></td>-->
         <td th:text="${user.getId()}"></td>
         <td> <a th:href="@{/admin/user/{id}(id=${user.getId()})}" th:text="${user.getUsername()}"></a></td>
         <td th:text="${user.getPassword()}"></td>
@@ -31,9 +29,6 @@
         <td> <a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}">Edit user</a>  </td>
         <td> <form th:method="DELETE" th:action="@{/admin/user/{id}(id=${user.getId()})}">
             <input th:type="submit" value="Delete user"/></form> </td>
-<!--        <td><form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">-->
-<!--            <input th:type="submit" value="Delete user"/></form>  </td>-->
-
     </tr>
     </tbody>
 

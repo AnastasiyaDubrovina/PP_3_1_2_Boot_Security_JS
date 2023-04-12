@@ -1,10 +1,8 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +22,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
 
     @GetMapping("/index")
     public String index(Model model) {
@@ -71,12 +68,11 @@ public class UserController {
         return "edit";
     }
 
-//    @PatchMapping("/admin/users/{id}")
-//    public String updateOrSave(@ModelAttribute("user") User user, @PathVariable("id") Long id, Model model) {
-////        userService.updateUserById(id, user);
-//        userService.updateUserById(id, user);
-//        return "redirect:/admin/users";
-//    }
+    @PatchMapping("/admin/users/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") Long id, Model model) {
+        userService.updateUserById(id, user, model);
+        return "redirect:/admin/users";
+    }
 
     @DeleteMapping("/admin/user/{id}")
     public String delete(@PathVariable("id") Long id) {

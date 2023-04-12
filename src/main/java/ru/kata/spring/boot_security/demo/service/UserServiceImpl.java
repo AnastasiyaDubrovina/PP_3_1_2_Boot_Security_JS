@@ -1,8 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,14 +14,11 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.security.UserDetailsImpl;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService, UserDetailsService  {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     UserDao userDao;
     RoleDao roleDao;
@@ -35,7 +30,6 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
         this.roleDao = roleDao;
         this.passwordEncoder = passwordEncoder;
     }
-
 
     @Transactional
     @Override
@@ -56,7 +50,12 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 
     @Transactional
     @Override
-    public void updateUserById(Long id, User user) {
+    public void updateUserById(Long id, User user, Model model) {
+        model.addAttribute("allRoles", findAllRoles());
+        for (Role role : user.getRoles()) {
+            role.setId(roleDao.findRoleByAuthority(role.getAuthority()).getId());
+        }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.updateUserById(id, user);
     }
 
@@ -91,10 +90,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
     }
 
     public List<Role> findAllRoles() {
-       return roleDao.findAll();
+        return roleDao.findAll();
     }
 
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-//        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-//    }
 }

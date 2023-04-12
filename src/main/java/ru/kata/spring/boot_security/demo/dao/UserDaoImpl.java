@@ -1,8 +1,5 @@
 package ru.kata.spring.boot_security.demo.dao;
 
-//import jakarta.persistence.EntityManager;
-//import jakarta.persistence.PersistenceContext;
-//import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 
@@ -10,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Optional;
 
 
 @Repository
@@ -20,22 +16,12 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    public void saveUser(User user) {    /////////////////////////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        user.setRoles(Collections.singleton(new Role(user.getRoles().stream().findAny().toString())));
-        if (!user.persisted()) {
+    public void saveUser(User user) {
             entityManager.persist(user);
-        } else {
-            entityManager.merge(user);
-        }
     }
 
     @Override
     public void updateUserById(Long id, User user) {
-//        User userToBeUpdated = showById(id);
-//        userToBeUpdated.setUsername(user.getUsername());
-//        userToBeUpdated.setPassword(user.getPassword());
-//        userToBeUpdated.setEmail(user.getEmail());
-//        userToBeUpdated.setRoles(user.getRoles());
         entityManager.merge(user);
     }
 
@@ -62,7 +48,7 @@ public class UserDaoImpl implements UserDao {
     @SuppressWarnings("unchecked")
     public List<User> getAllUsers() {
         return entityManager.createQuery(
-                "select u from User u").getResultList(); //User.class
+                "select u from User u").getResultList();
     }
 
 

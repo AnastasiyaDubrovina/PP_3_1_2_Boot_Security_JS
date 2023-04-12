@@ -1,11 +1,5 @@
 package ru.kata.spring.boot_security.demo.model;
 
-//import jakarta.persistence.*;
-
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
 import javax.persistence.Table;
 import java.util.ArrayList;
@@ -26,22 +20,14 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection <Role> roles = new ArrayList<>();
-
-//    public User(String username, String password, String email, Collection<Role> roles) {
-//        this.username = username;
-//        this.password = password;
-//        this.email = email;
-//        this.roles = roles;
-//
-//    }
+    private Collection<Role> roles = new ArrayList<>();
 
     public User() {
     }
