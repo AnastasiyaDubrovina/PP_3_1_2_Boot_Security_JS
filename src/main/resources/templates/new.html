@@ -7,29 +7,37 @@
 <body>
 
 <form th:method="POST" th:action="@{/admin/users}" th:object="${user}">
-    <label for="username">Enter username: </label>
-    <input type="text" th:field="*{username}"/>
+    <label for="firstName">FirstName </label>
+    <input type="text" th:field="*{firstName}"/>
     <br/>
-    <label for="password">Enter password: </label>
-    <input type="text" th:field="*{password}"/>
+    <label for="lastName">LastName </label>
+    <input type="text" th:field="*{lastName}"/>
     <br/>
-    <label for="email">Enter email: </label>
+    <label for="age">Age </label>
+    <input type="text" th:field="*{age}"/>
+    <br/>
+    <label for="email">Email </label>
     <input type="text" th:field="*{email}"/>
     <br/>
+    <label for="password">Password </label>
+    <input type="text" th:field="*{password}"/>
+    <br/>
+
 
     <div class="form-row mb-3">
         <div class="col-md-6 mb-3">
-            <label for="roles">Roles</label>
+            <label for="roles">Role</label>
             <div id="roles">
                 <div class="form-check form-check-inline" th:each="role : ${allRoles}">
-                    <input type="checkbox" class="form-check-input" name="roles" th:id="${role.name}" th:value="${role.name}">
+                    <input type="checkbox" class="form-check-input" name="roles" th:id="${role.name}"
+                           th:value="${role.name}">
                     <label class="form-check-label" th:for="${role.name}" th:text="${role.name}"/>
                 </div>
             </div>
         </div>
 
-    <input type="submit" value="Create!"/>
-
+        <input type="submit" value="Create!"/>
+    </div>
 </form>
 
 </body>

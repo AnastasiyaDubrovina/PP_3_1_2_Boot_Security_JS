@@ -17,7 +17,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void saveUser(User user) {
-            entityManager.persist(user);
+        entityManager.persist(user);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String username) {
-        Query query = entityManager.createQuery("select u from User u left join fetch u.roles where u.username=:username", User.class);
+        Query query = entityManager.createQuery("select u from User u left join fetch u.roles where u.email=:username", User.class);
         query.setParameter("username", username);
         return (User) query.getSingleResult();
     }

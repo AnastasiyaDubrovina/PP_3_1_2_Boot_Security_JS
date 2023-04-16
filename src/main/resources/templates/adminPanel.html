@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>All users</title>
+    <title>Admin panel</title>
 </head>
 <body>
 
@@ -10,21 +10,23 @@
     <thead>
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">USERNAME</th>
-        <th scope="col">PASSWORD</th>
-        <th scope="col">EMAIL</th>
-        <th scope="col">ROLE</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="user: ${users}">
+<!--        <a th:href="@{/admin/user/{id}(id=${user.getId()})}"-->
         <td th:text="${user.getId()}"></td>
-        <td> <a th:href="@{/admin/user/{id}(id=${user.getId()})}" th:text="${user.getUsername()}"></a></td>
-        <td th:text="${user.getPassword()}"></td>
+        <td th:text="${user.getFirstName()}"></td>
+        <td th:text="${user.getLastName()}"></td>
+        <td th:text="${user.getAge()}"></td>
         <td th:text="${user.getEmail()}"></td>
-        <td th:each="role : ${user.getRoles()}" th:text="${role.getName()}"></td>
+        <a th:each="role : ${user.getRoles()}">
+            <td th:text="${role.getName()}"></td> </a>
 
         <td> <a th:href="@{/admin/users/{id}/edit(id=${user.getId()})}">Edit user</a>  </td>
         <td> <form th:method="DELETE" th:action="@{/admin/user/{id}(id=${user.getId()})}">

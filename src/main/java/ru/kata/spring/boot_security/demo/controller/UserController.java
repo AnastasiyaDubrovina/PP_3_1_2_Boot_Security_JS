@@ -8,13 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.security.UserDetailsImpl;
 import ru.kata.spring.boot_security.demo.service.UserService;
-import javax.transaction.Transactional;
 
 
 @Controller
-@Transactional
 public class UserController {
     private UserService userService;
 
@@ -32,21 +29,21 @@ public class UserController {
     @GetMapping("/admin/users")
     public String allUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        return "users";
+        return "adminPanel";
     }
 
     @GetMapping("/user")
     public String showUserInfo(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        model.addAttribute("user", userDetails.getUser());
-        return "show";
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("user", user);
+        return "userPage";
     }
 
     @GetMapping("/admin/user/{id}")
     public String showUser(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.showById(id));
-        return "show";
+        return "userPage";
     }
 
     @GetMapping("/admin/new")
