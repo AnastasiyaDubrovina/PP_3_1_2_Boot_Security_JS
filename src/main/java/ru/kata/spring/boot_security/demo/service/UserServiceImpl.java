@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void saveUser(User user, Model model) {
+    public void saveUser(User user) {
         for (Role role : user.getRoles()) {
             role.setId(roleDao.findRoleByAuthority(role.getAuthority()).getId());
         }

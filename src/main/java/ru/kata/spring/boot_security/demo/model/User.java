@@ -32,7 +32,6 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-
     @ManyToMany
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -40,6 +39,30 @@ public class User implements UserDetails {
     private Collection<Role> roles = new ArrayList<>();
 
     public User() {
+    }
+
+    public User(String firstName, String lastName, Integer age, String email, String password, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public String getUserPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String rolesToString() {
+        String role = "";
+        for (Role r : roles)
+            role = role + " " + r.toString();
+        return role;
     }
 
     public Long getId() {
@@ -58,31 +81,6 @@ public class User implements UserDetails {
         this.firstName = firstName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Collection<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "User " + firstName;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -97,6 +95,22 @@ public class User implements UserDetails {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -133,6 +147,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-
 }
