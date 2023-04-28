@@ -6,15 +6,15 @@ fetch(url)
     .then(res => res.json())
     .then(data => {
         data.forEach(user => {
-            output += <tr>
+            output += `<tr>
                 <th><p>${user.id} </p></th>
                 <th><p>${user.firstname} </p></th>
                 <th><p>${user.lastName} </p></th>
                 <th><p>${user.age} </p></th>
                 <th><p>${user.email} </p></th>
-
-            </tr>;
+            </tr>`;
         });
         usersTable.innerHTML = output;
     });
+
 
