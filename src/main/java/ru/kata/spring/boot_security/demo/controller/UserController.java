@@ -29,15 +29,15 @@ public class UserController {
         this.userService = userService;
     }
 
-//    //для теста постман
+    //для теста постман
 //    @GetMapping()
-//    public ResponseEntity<User> showUser( Model model) throws JsonProcessingException {
+//    public ResponseEntity<User> showUser() {
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User userCont = (User) authentication.getPrincipal();
-//        model.addAttribute("user", userCont);
+//        User user = (User) authentication.getPrincipal();
+////        model.addAttribute("user", userCont);
 ////        User user = userService.showById(id);
 ////        String userJson = new ObjectMapper().writeValueAsString(userCont);
-//        return ResponseEntity.ok(userCont);
+//        return ResponseEntity.ok(user);
 //    }
 
 
@@ -48,8 +48,9 @@ public class UserController {
         User user = (User) authentication.getPrincipal();
         model.addAttribute("user", user);
         return "userPage";
-
     }
+
+
     // предполагаемый
 //    @GetMapping("/user")
 //    public ResponseEntity<String> showUserInfo(Model model) throws JsonProcessingException {

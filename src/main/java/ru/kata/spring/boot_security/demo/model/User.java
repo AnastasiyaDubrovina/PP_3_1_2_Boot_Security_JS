@@ -50,7 +50,7 @@ public class User implements UserDetails {
         this.password = password;
         this.roles = roles;
     }
-    @JsonIgnore
+
     public String getUserPassword() {
         return password;
     }
@@ -106,7 +106,7 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-    @JsonIgnore
+
     public Collection<Role> getRoles() {
         return roles;
     }
