@@ -47,6 +47,7 @@
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
                     <a class="nav-link active"  href="#admin"  data-toggle="tab">
+<!--                    <a class="nav-link active" aria-current="page" href="/admin">-->
                         Admin
                     </a>
                 </li>
@@ -75,7 +76,7 @@
 
     <div class="col-md-10">
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active fade in" id="admin">
+                <div role="tabpanel" class="tab-pane active in" id="admin">
                 <div class="container-fluid">
                     <h1>Admin panel</h1>
 <!--                    -->
@@ -127,53 +128,57 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading h3">Add new user</div>
                                 <div class="panel-body">
-                                    <form role="form" id="creating-user-form">
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
+                                    <div class="container">
+                                        <div class="row justify-content-center align-items-center">
+                                    <form class="col-4" role="form" id="creating-user-form">
+                                        <div class="form-group text-center">
                                             <input type="hidden"/>
-                                            <label for="first_name">First name</label>
+                                            <label class="col-form-label font-weight-bold" for="first_name">First name</label>
                                             <div>
                                                 <input type="text" class="form-control"
                                                        required minlength="1" maxlength="30" id="first_name"
                                                        placeholder="First name"/>
                                             </div>
                                         </div>
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
-                                            <label for="last_name">Last name</label>
+                                        <div class="form-group text-center">
+                                            <label class="col-form-label font-weight-bold" for="last_name">Last name</label>
                                             <div>
                                                 <input type="text" class="form-control"
                                                        required minlength="1" maxlength="30" id="last_name"
                                                        placeholder="Last name"/>
                                             </div>
                                         </div>
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
-                                            <label for="age">Age</label>
+                                        <div class="form-group text-center">
+                                            <label class="col-form-label font-weight-bold" for="age">Age</label>
                                             <input type="number" class="form-control"
                                                    size="3" name="num" min="1" max="150" id="age"
                                                    placeholder="Age"/>
                                         </div>
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
-                                            <label for="email">Email</label>
+                                        <div class="form-group text-center">
+                                            <label class="col-form-label font-weight-bold" for="email">Email</label>
                                             <input type="email" class="form-control" id="email"
                                                    placeholder="Email" required/>
                                         </div>
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
-                                            <label for="password">Password</label>
+                                        <div class="form-group text-center">
+                                            <label class="col-form-label font-weight-bold" for="password">Password</label>
                                             <input type="password" id="password" placeholder="Password"
                                                    class="form-control"
                                                    required minlength="1" maxlength="32"/>
                                         </div>
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
-                                            <label for="roles">Role</label>
+                                        <div class="form-group text-center">
+                                            <label class="col-form-label font-weight-bold" for="roles">Role</label>
                                             <select class="form-control" id="roles" multiple size="2">
                                                 <option value="1">ROLE_USER</option>
                                                 <option value="2">ROLE_ADMIN</option>
                                             </select>
                                         </div>
                                         <br>
-                                        <div class="form-group text-center col-lg-4 col-lg-offset-4">
+                                        <div class="form-group text-center">
                                             <button type="submit" class="btn btn-success">Add new user</button>
                                         </div>
                                     </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -186,10 +191,10 @@
 
             <div role="tabpanel" class="tab-pane fade in" id="user">
                 <div class="container-fluid">
-                    <h1>User information page</h1>
+                    <h1>User information-page</h1>
 
                     <div class="panel panel-default">
-                        <div class="panel-heading h3">About user</div>
+                        <div class="panel-heading h5">About user</div>
                         <div class="panel-body">
                             <table class="table table-striped">
                                 <thead>

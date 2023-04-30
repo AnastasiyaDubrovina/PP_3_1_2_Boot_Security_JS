@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -26,7 +27,7 @@ public class AdminRestController {
     }
 
     @GetMapping("/admin")
-    public ResponseEntity<List<User>> allUsers(Model model) throws JsonProcessingException {
+    public ResponseEntity<List<User>> allUsers() throws JsonProcessingException {
         List<User> userList = userService.getAllUsers();
 //        List<Role> roleList = userService.findAllRoles();
 ////        return userList;
@@ -34,14 +35,20 @@ public class AdminRestController {
         return ResponseEntity.ok(userList);
     }
 
+    @GetMapping("/roles")
+    public ResponseEntity<List<Role>> allRoles()  {
+        List<Role> roleList = userService.findAllRoles();
+        return ResponseEntity.ok(roleList);
+    }
 
-    @PostMapping(value = "/users", consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    @PostMapping(value = "/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         userService.saveUser(user);
-        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/admin/users/{id}")
-                .buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uriOfNewResource).body(user);
+//        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
+//                .path("/users/{id}")
+//                .buildAndExpand(user.getId()).toUri();
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/users/{id}")
@@ -50,7 +57,7 @@ public class AdminRestController {
         return ResponseEntity.ok(user);
     }
 
-    @PatchMapping(value = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/users/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody User user, @PathVariable("id") Long id, Model model) {
         userService.updateUserById(id, user, model);

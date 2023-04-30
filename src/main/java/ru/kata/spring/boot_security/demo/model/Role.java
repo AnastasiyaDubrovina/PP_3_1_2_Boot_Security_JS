@@ -35,7 +35,7 @@ public class Role implements GrantedAuthority {
     public void setId(Long id) {
         this.id = id;
     }
-    @JsonIgnore
+
     public String getName() {
         return name;
     }
