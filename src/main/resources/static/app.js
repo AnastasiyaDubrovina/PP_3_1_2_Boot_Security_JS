@@ -5,10 +5,9 @@ let output = '';
 let roleLet;
 
 
- showUserPage()
+showUserPage()
 
 
-//таблица юзеров
 const usersTable = document.getElementById('users-table')
 const listAllUsers = (users) => {
     users.forEach(user => {
@@ -36,13 +35,12 @@ const listAllUsers = (users) => {
     usersTable.innerHTML = output;
 }
 
-//Admin panel All users
+
 fetch(usersListUrl)
     .then(res => res.json())
     .then(data => listAllUsers(data));
 
 
-// Showing user page
 function showUserPage() {
     const userInfoAdmin = document.getElementById('user-info')
     let userInfoOutput
@@ -64,9 +62,7 @@ function showUserPage() {
         })
 }
 
-// Edit user modal
 
-const editingUserForm = document.getElementById('users-table');
 usersTable.addEventListener('click', (e) => {
     e.preventDefault()
     if (e.target.id === 'editButton') {
@@ -80,7 +76,7 @@ usersTable.addEventListener('click', (e) => {
                 $('#emailEdit').val(data.email)
                 $('#passwordEdit').val('')
 
-                // Fetch all roles from API and populate dropdown options
+
                 fetch(rolesListUrl)
                     .then(res => res.json())
                     .then(rolesData => {
@@ -113,7 +109,7 @@ usersTable.addEventListener('click', (e) => {
     }
 })
 
-// Editing user
+
 const editModalForm = document.getElementById('editModalForm')
 
 editModalForm.addEventListener('submit', (e) => {
@@ -126,7 +122,7 @@ editModalForm.addEventListener('submit', (e) => {
     const passwordById = document.getElementById('passwordEdit');
     const roleById = document.getElementById('rolesEdit');
 
-    // create array of roles
+
     const roles = [];
     for (let i = 0; i < roleById.options.length; i++) {
         if (roleById.options[i].selected) {
@@ -147,7 +143,7 @@ editModalForm.addEventListener('submit', (e) => {
         roles: roles
     };
 
-    console.log('Request body:', requestBody);
+
     const uid = document.getElementById('idEdit').value
     fetch(`http://localhost:8080/api/users/${uid}`, {
         method: 'PATCH',
@@ -186,21 +182,16 @@ deleteModalForm.addEventListener('submit', (e) => {
 })
 
 
-
-// Creating new user
 const createUserUrl = 'http://localhost:8080/api/users';
 const selectRoleForm = document.getElementById('roles');
 
 
-// Fetch all roles from API and populate dropdown options
 fetch(rolesListUrl)
     .then(res => res.json())
     .then(data => {
         let options = '';
         for (const [k, v] of Object.entries(data)) {
-
             options += `<option value="${k}">${v.name}</option>`;
-            console.log(options)
         }
         selectRoleForm.innerHTML = options;
     })
@@ -218,7 +209,7 @@ createUserForm.addEventListener('submit', (e) => {
     const passwordById = document.getElementById('password');
     const roleById = document.getElementById('roles');
 
-    // create array of roles
+
     const roles = [];
     for (let i = 0; i < roleById.options.length; i++) {
         if (roleById.options[i].selected) {
@@ -227,10 +218,9 @@ createUserForm.addEventListener('submit', (e) => {
                 name: roleById.options[i].text
             });
         }
-        console.log(roles)
     }
 
-    // POST user data to API
+
     fetch(createUserUrl, {
         method: 'POST',
         headers: {

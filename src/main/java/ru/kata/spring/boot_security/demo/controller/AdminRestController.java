@@ -1,18 +1,14 @@
 package ru.kata.spring.boot_security.demo.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.net.URI;
 import java.util.List;
 
 
@@ -27,16 +23,13 @@ public class AdminRestController {
     }
 
     @GetMapping("/admin")
-    public ResponseEntity<List<User>> allUsers() throws JsonProcessingException {
+    public ResponseEntity<List<User>> allUsers() {
         List<User> userList = userService.getAllUsers();
-//        List<Role> roleList = userService.findAllRoles();
-////        return userList;
-//        String userListJson = new ObjectMapper().writeValueAsString(userList);
         return ResponseEntity.ok(userList);
     }
 
     @GetMapping("/roles")
-    public ResponseEntity<List<Role>> allRoles()  {
+    public ResponseEntity<List<Role>> allRoles() {
         List<Role> roleList = userService.findAllRoles();
         return ResponseEntity.ok(roleList);
     }
@@ -45,14 +38,11 @@ public class AdminRestController {
     @PostMapping(value = "/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         userService.saveUser(user);
-//        URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-//                .path("/users/{id}")
-//                .buildAndExpand(user.getId()).toUri();
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") Long id)  {
+    public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
         User user = userService.showById(id);
         return ResponseEntity.ok(user);
     }

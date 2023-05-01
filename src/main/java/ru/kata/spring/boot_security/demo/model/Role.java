@@ -20,7 +20,6 @@ public class Role implements GrantedAuthority {
     private String name;
 
 
-
     public Role() {
     }
 
@@ -45,10 +44,10 @@ public class Role implements GrantedAuthority {
     }
 
 
-
     public void setName(String name) {
         this.name = name;
     }
+
     @JsonIgnore
     @Override
     public String getAuthority() {
